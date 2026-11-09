@@ -1,0 +1,56 @@
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS'
+      when: never
+    - if: '$CI_COMMIT_BRANCH'
+  auto_cancel:
+    on_new_commit: interruptible
+
+stages: [verify]
+
+default:
+  interruptible: true
+
+node_tools:
+  stage: verify
+  image: node:22-bookworm-slim
+  variables:
+    npm_config_cache: '$CI_PROJECT_DIR/.cache-npm'
+  cache:
+    key:
+      files: [tools/image-to-pixel/package-lock.json]
+    paths: [.cache-npm/]
+  script:
+    - npm run test:maps
+    - npm run setup:images
+    - npm run test:images
+    - mkdir -p reports
+    - npm audit --prefix tools/image-to-pixel --json > reports/image-dependencies.json
+  artifacts:
+    when: always
+    paths: [reports/]
+    expire_in: 14 days
+
+pixel_snapper:
+  stage: verify
+  image: rust:1.90-bookworm
+  variables:
+    CARGO_HOME: '$CI_PROJECT_DIR/.cache-cargo'
+  cache:
+    key:
+      files: [tools/pixel-snapper/vendor/Cargo.lock]
+      prefix: rust-1.90
+    paths:
+      - .cache-cargo/registry/
+      - .cache-cargo/git/
+      - tools/pixel-snapper/.cache/target/
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq --no-install-recommends python3
+  script:
+    - rustc --version
+    - cargo --version
+    - python3 tools/pixel-snapper/snap.py verify
+    - python3 tools/pixel-snapper/snap.py build
+    - python3 -m unittest discover -s tools/pixel-snapper/tests -v
+    - cargo test --locked --offline --manifest-path tools/pixel-snapper/vendor/Cargo.toml --target-dir tools/pixel-snapper/.cache/target

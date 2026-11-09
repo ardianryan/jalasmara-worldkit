@@ -1,0 +1,5 @@
+{
+  "name": "Jala Muara asset review palette",
+  "purpose": "Optional restricted palette for preview outputs; not an automatic conversion of existing artwork.",
+  "colors": ["202d3a", "344a4b", "52656b", "657361", "6faba2", "887055", "654733", "af8759", "efc478", "f1e1bc", "302d2a", "cdbb95", "394e42", "8b9776", "9b6045", "c8d5c8"]
+}

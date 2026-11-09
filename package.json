@@ -1,0 +1,24 @@
+{
+  "name": "@jalasmara/worldkit",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "description": "Offline map drafts and reviewed pixel-asset preparation",
+  "engines": { "node": ">=22.12" },
+  "scripts": {
+    "setup:images": "npm ci --prefix tools/image-to-pixel --ignore-scripts",
+    "test": "npm run test:maps && npm run test:images",
+    "test:maps": "node --test tools/worldkit/adapter.test.mjs",
+    "test:images": "node --test tools/image-to-pixel/convert.test.mjs",
+    "verify:snapper": "python3 tools/pixel-snapper/snap.py verify",
+    "build:snapper": "python3 tools/pixel-snapper/snap.py build",
+    "test:snapper": "python3 -m unittest discover -s tools/pixel-snapper/tests -v",
+    "test:rust": "cargo test --locked --offline --manifest-path tools/pixel-snapper/vendor/Cargo.toml --target-dir tools/pixel-snapper/.cache/target",
+    "check": "npm test && npm run verify:snapper && npm run test:snapper && npm run test:rust",
+    "audit:images": "npm audit --prefix tools/image-to-pixel",
+    "map:import": "node tools/worldkit/cli.mjs import",
+    "palette": "node tools/image-to-pixel/convert.mjs",
+    "snap": "python3 tools/pixel-snapper/snap.py snap"
+  }
+}

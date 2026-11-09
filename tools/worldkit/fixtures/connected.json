@@ -1,0 +1,23 @@
+{
+  "maps": [
+    {
+      "map": {
+        "id": "bandar_draft", "name": "Bandar local authoring sample", "kind": "outdoor", "width": 5, "height": 4,
+        "rows": ["ggggg", "ggggg", "ggggg", "ggggg"],
+        "heights": ["00000", "00000", "00000", "00000"],
+        "portals": [{"x": 4, "y": 2, "to": "grove_draft", "tx": 0, "ty": 2}],
+        "anchors": {"notice": [1, 2]}
+      },
+      "entities": [{"id": "shade_tree", "type": "jalasmara/tree", "place": {"on": "tile", "map": "bandar_draft", "x": 2, "y": 1}}]
+    },
+    {
+      "map": {
+        "id": "grove_draft", "name": "Grove local authoring sample", "kind": "outdoor", "width": 5, "height": 4,
+        "rows": ["ggggg", "ggggg", "ggggg", "ggggg"],
+        "portals": [{"x": 0, "y": 2, "to": "bandar_draft", "tx": 4, "ty": 2}],
+        "anchors": {"observe": [3, 2]}
+      },
+      "entities": []
+    }
+  ]
+}

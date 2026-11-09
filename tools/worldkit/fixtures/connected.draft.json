@@ -1,0 +1,319 @@
+{
+  "anchors": [
+    {
+      "id": "bandar_draft.anchor.notice",
+      "map": "hub",
+      "sourceMap": "bandar_draft",
+      "x": 96,
+      "y": 160
+    },
+    {
+      "id": "grove_draft.anchor.observe",
+      "map": "forest",
+      "sourceMap": "grove_draft",
+      "x": 224,
+      "y": 160
+    }
+  ],
+  "diagnostics": [],
+  "landMaps": {
+    "forest": {
+      "bridges": [],
+      "height": 256,
+      "id": "forest",
+      "layoutVersion": 1,
+      "obstacles": [],
+      "routes": [],
+      "spawn": {
+        "x": 32,
+        "y": 160
+      },
+      "stairs": [],
+      "surfaces": [
+        {
+          "elevation": 0,
+          "id": "grove_draft.floor.0.0.5",
+          "material": "grass",
+          "polygon": [
+            [
+              0,
+              0
+            ],
+            [
+              320,
+              0
+            ],
+            [
+              320,
+              64
+            ],
+            [
+              0,
+              64
+            ]
+          ]
+        },
+        {
+          "elevation": 0,
+          "id": "grove_draft.floor.0.1.5",
+          "material": "grass",
+          "polygon": [
+            [
+              0,
+              64
+            ],
+            [
+              320,
+              64
+            ],
+            [
+              320,
+              128
+            ],
+            [
+              0,
+              128
+            ]
+          ]
+        },
+        {
+          "elevation": 0,
+          "id": "grove_draft.floor.0.2.5",
+          "material": "grass",
+          "polygon": [
+            [
+              0,
+              128
+            ],
+            [
+              320,
+              128
+            ],
+            [
+              320,
+              192
+            ],
+            [
+              0,
+              192
+            ]
+          ]
+        },
+        {
+          "elevation": 0,
+          "id": "grove_draft.floor.0.3.5",
+          "material": "grass",
+          "polygon": [
+            [
+              0,
+              192
+            ],
+            [
+              320,
+              192
+            ],
+            [
+              320,
+              256
+            ],
+            [
+              0,
+              256
+            ]
+          ]
+        }
+      ],
+      "terraces": [
+        {
+          "elevation": 0,
+          "id": "grove_draft.level.0"
+        }
+      ],
+      "width": 320
+    },
+    "hub": {
+      "bridges": [],
+      "height": 256,
+      "id": "hub",
+      "layoutVersion": 1,
+      "obstacles": [
+        {
+          "elevation": 0,
+          "footprint": [
+            [
+              150.4,
+              86.4
+            ],
+            [
+              169.6,
+              86.4
+            ],
+            [
+              169.6,
+              105.60000000000001
+            ],
+            [
+              150.4,
+              105.60000000000001
+            ]
+          ],
+          "height": 19.2,
+          "height3d": 150,
+          "id": "bandar_draft.entity.shade_tree",
+          "kind": "tree",
+          "variant": "broadleaf",
+          "width": 19.2,
+          "x": 150.4,
+          "y": 86.4
+        }
+      ],
+      "routes": [],
+      "spawn": {
+        "x": 32,
+        "y": 160
+      },
+      "stairs": [],
+      "surfaces": [
+        {
+          "elevation": 0,
+          "id": "bandar_draft.floor.0.0.5",
+          "material": "grass",
+          "polygon": [
+            [
+              0,
+              0
+            ],
+            [
+              320,
+              0
+            ],
+            [
+              320,
+              64
+            ],
+            [
+              0,
+              64
+            ]
+          ]
+        },
+        {
+          "elevation": 0,
+          "id": "bandar_draft.floor.0.1.5",
+          "material": "grass",
+          "polygon": [
+            [
+              0,
+              64
+            ],
+            [
+              320,
+              64
+            ],
+            [
+              320,
+              128
+            ],
+            [
+              0,
+              128
+            ]
+          ]
+        },
+        {
+          "elevation": 0,
+          "id": "bandar_draft.floor.0.2.5",
+          "material": "grass",
+          "polygon": [
+            [
+              0,
+              128
+            ],
+            [
+              320,
+              128
+            ],
+            [
+              320,
+              192
+            ],
+            [
+              0,
+              192
+            ]
+          ]
+        },
+        {
+          "elevation": 0,
+          "id": "bandar_draft.floor.0.3.5",
+          "material": "grass",
+          "polygon": [
+            [
+              0,
+              192
+            ],
+            [
+              320,
+              192
+            ],
+            [
+              320,
+              256
+            ],
+            [
+              0,
+              256
+            ]
+          ]
+        }
+      ],
+      "terraces": [
+        {
+          "elevation": 0,
+          "id": "bandar_draft.level.0"
+        }
+      ],
+      "width": 320
+    }
+  },
+  "portals": [
+    {
+      "enabledByDefault": true,
+      "from": {
+        "map": "hub",
+        "x": 288,
+        "y": 160
+      },
+      "id": "bandar_draft.portal.4.2.grove_draft.0.2",
+      "to": {
+        "map": "forest",
+        "x": 32,
+        "y": 160
+      }
+    },
+    {
+      "enabledByDefault": true,
+      "from": {
+        "map": "forest",
+        "x": 32,
+        "y": 160
+      },
+      "id": "grove_draft.portal.0.2.bandar_draft.4.2",
+      "to": {
+        "map": "hub",
+        "x": 288,
+        "y": 160
+      }
+    }
+  ],
+  "publishable": false,
+  "schema": "jalasmara.worldkit.draft.v1",
+  "source": {
+    "configHash": "42ec5828667d4ede84c84b63d1dd80fe9d93cde4fd29dbad74e0692a740790d4",
+    "format": "openworld-map-entities",
+    "inputHash": "c6d15ab24aa17be6df7e30568cb0af2f56df6b2b8bc2a737067e3d53c4ea99df",
+    "referenceCommit": "076ab27d5312416cbabe19c12b90e086f5fc32d7"
+  },
+  "status": "draft",
+  "valid": true
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@jalasmara/worldkit-palette",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=22.12" },
+  "scripts": { "test": "node --test convert.test.mjs" },
+  "dependencies": {
+    "image-to-pixel": "3.2.0",
+    "pngjs": "7.0.0"
+  }
+}

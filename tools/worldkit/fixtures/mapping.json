@@ -1,0 +1,9 @@
+{
+  "tileSize": 64,
+  "heightScale": 0.5,
+  "targets": {"bandar_draft": "hub", "grove_draft": "forest"},
+  "spawns": {"bandar_draft": [0, 2], "grove_draft": [0, 2]},
+  "tiles": {"g": {"material": "grass"}, "d": {"material": "dirt"}, "~": {"blocked": true}},
+  "entities": {"jalasmara/tree": {"kind": "tree", "size": [0.3, 0.3], "height3d": 150, "variant": "broadleaf"}},
+  "connectors": {}
+}

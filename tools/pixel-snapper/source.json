@@ -1,0 +1,26 @@
+{
+  "integration": "JalasmaraWorldKit / Pixel Snapper adapter",
+  "upstream": {
+    "repository": "https://github.com/Hugo-Dz/spritefusion-pixel-snapper",
+    "commit": "02f9315d73d3219274d17767b36d9a231a6b1f4b",
+    "packageVersion": "1.0.0",
+    "license": "MIT",
+    "copyright": "Copyright (c) 2025 Hugo Duprez"
+  },
+  "retrievedAt": "2026-11-09",
+  "vendoredFilesSha256": {
+    "Cargo.lock": "d349974f31866473e88270dc9b2ad19c3e2e3711c8e2756151be18fb24a5e60f",
+    "Cargo.toml": "387a7cd0c75530a51330ba4d68b0ba2e58bc4a5187a41d2c166c0dedb75752b3",
+    "LICENSE": "52787825b5ae198689ef4141cfaddfa72778977f103f1e3db9a3ee61fd934750",
+    "README.md": "d0e05b03c78b954855f988530233410e877032c9f04335ccfe34e06a75d31331",
+    "src/lib.rs": "08c1323a65243400a4a6ce7ac0051ad116e39869f3276630c2a16a02cc2e05b4",
+    "src/main.rs": "b1b0e0c4dfd4f8d015cfa244b91f6c8cc3c232713ee2f3fa32de2fa23f2dda1b"
+  },
+  "modifications": "None to vendored upstream files. Jalasmara adapter, palette and fixture tests are separate.",
+  "excluded": [
+    "static browser app",
+    "git history",
+    "compiled binaries",
+    "target build cache"
+  ]
+}

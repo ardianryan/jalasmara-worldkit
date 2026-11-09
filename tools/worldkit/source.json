@@ -1,0 +1,16 @@
+{
+  "tool": "JalasmaraWorldKit offline map adapter",
+  "implementation": "Original Node.js implementation; no upstream engine/editor code or assets copied",
+  "runtimeDependencies": [],
+  "reference": {
+    "repository": "https://github.com/SihanXU/openworld",
+    "commit": "076ab27d5312416cbabe19c12b90e086f5fc32d7",
+    "schema": "https://github.com/SihanXU/openworld/blob/076ab27d5312416cbabe19c12b90e086f5fc32d7/packages/format/schema/map.schema.json",
+    "example": "https://github.com/SihanXU/openworld/blob/076ab27d5312416cbabe19c12b90e086f5fc32d7/games/starter/maps/cottage.json",
+    "license": "MIT for code; upstream asset-specific exceptions do not grant rights to all artwork/audio/fonts",
+    "licenseUrl": "https://github.com/SihanXU/openworld/blob/076ab27d5312416cbabe19c12b90e086f5fc32d7/LICENSE"
+  },
+  "fixtures": "Original synthetic maps authored for adapter tests; no upstream map/art assets distributed",
+  "geometryContract": "12px margin; centre plus eight floor probes; obstacle edge-distance rejection; segments sampled at most6px apart",
+  "output": "Editable review draft only; never modifies live WORLD or publishes game content"
+}
