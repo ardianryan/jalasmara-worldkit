@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, openSync, closeSync, unlinkSync, mkdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
@@ -11,10 +11,40 @@ export const COMFY_PALETTE = [
   '#cdbb87', '#f1e1bc', '#969d98', '#d2bd91', '#a76045', '#d99a68',
 ];
 
+function writePreviewPair(output, bytes, report) {
+  const owned = [];
+  let completed = false;
+  let failure;
+  try {
+    for (const path of [output, output + '.json']) {
+      const descriptor = openSync(path, 'wx');
+      owned.push({ path, descriptor });
+    }
+    writeFileSync(owned[0].descriptor, bytes);
+    writeFileSync(owned[1].descriptor, JSON.stringify(report, null, 2) + '\n');
+    completed = true;
+  } catch (error) {
+    failure = error;
+    if (error.code === 'EEXIST') throw new Error('Choose a new output path; source assets and existing previews are never overwritten.', { cause: error });
+    throw error;
+  } finally {
+    const cleanupErrors = [];
+    for (const file of owned) {
+      try { closeSync(file.descriptor); } catch (error) { cleanupErrors.push(error); }
+    }
+    if (!completed) {
+      for (const file of owned) {
+        try { unlinkSync(file.path); } catch (error) { cleanupErrors.push(error); }
+      }
+    }
+    if (cleanupErrors.length) throw new AggregateError([...(failure ? [failure] : []), ...cleanupErrors], 'Preview pair cleanup failed.');
+  }
+}
+
 export async function convert(input, output, width) {
   input = resolve(input);
   output = resolve(output);
-  if (input === output || existsSync(output) || existsSync(output + '.json')) {
+  if (input === output || input === output + '.json') {
     throw new Error('Choose a new output path; source assets and existing previews are never overwritten.');
   }
   if (!Number.isInteger(width) || width < 1 || width > 2048) throw new Error('Width must be an integer from 1 to 2048.');
@@ -43,8 +73,7 @@ export async function convert(input, output, width) {
       status: 'preview-requires-visual-review',
     };
     mkdirSync(dirname(output), { recursive: true });
-    writeFileSync(output, bytes, { flag: 'wx' });
-    writeFileSync(output + '.json', JSON.stringify(report, null, 2) + '\n', { flag: 'wx' });
+    writePreviewPair(output, bytes, report);
     return report;
   } finally { engine.destroy(); }
 }
