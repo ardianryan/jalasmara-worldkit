@@ -1,6 +1,6 @@
 # JalasmaraWorldKit
 
-Offline tools for creating **reviewable map drafts and pixel-asset previews** for [Jalasmara](https://git.ppti.me/ardianryan/Jalasmara-The-Game). WorldKit is an authoring workflow, not the game engine, a live editor, or a map publishing service. Outputs require visual and gameplay review before they enter Godot or the server-owned world.
+Offline tools for creating **reviewable map drafts and pixel-asset previews** for [Jalasmara](https://github.com/ardianryan/Jalasmara-The-Game). WorldKit is an authoring workflow, not the game engine, a live editor, or a map publishing service. Outputs require visual and gameplay review before they enter Godot or the server-owned world.
 
 [Development screenshots](docs/visual/README.md) · [Tool provenance](THIRD_PARTY_NOTICES.md) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md)
 
@@ -36,7 +36,7 @@ npm run snap -- path/to/source.png artifacts/grid-preview.png \
   --pixel-size 4 --palette jala-muara
 ```
 
-Each command writes to a new output path and refuses unsafe overwrites. The map adapter requires explicit tile/material mappings, reachable portals, and authored height connectors. It reports invalid geometry rather than silently flattening it. Pixel conversion is lossy; inspect transparency, frame boundaries, small details, and foot pivots before using a preview. The [in-game copy of the adapter](https://git.ppti.me/ardianryan/Jalasmara-The-Game/src/branch/main/tools/worldkit) has a separate compatibility check against current world geometry.
+Each command writes to a new output path and refuses unsafe overwrites. The map adapter requires explicit tile/material mappings, reachable portals, and authored height connectors. It reports invalid geometry rather than silently flattening it. Pixel conversion is lossy; inspect transparency, frame boundaries, small details, and foot pivots before using a preview. The [in-game copy of the adapter](https://github.com/ardianryan/Jalasmara-The-Game/tree/main/tools/worldkit) has a separate compatibility check against current world geometry.
 
 ## What the screenshots show
 

@@ -10,4 +10,4 @@ This roadmap describes candidate authoring work, not production-game acceptance 
 - [ ] Pilot new fauna or character workflows only with explicit provenance, licenses, animation checks, and game-side acceptance.
 - [ ] Review dependency updates and commission an independent security assessment before making assurance claims.
 
-See the [game roadmap](https://git.ppti.me/ardianryan/Jalasmara-The-Game/src/branch/main/ROADMAP.md) for gameplay priorities.
+See the [game roadmap](https://github.com/ardianryan/Jalasmara-The-Game/blob/main/ROADMAP.md) for gameplay priorities.
