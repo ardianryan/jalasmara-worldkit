@@ -11,4 +11,6 @@ Original adapters and synthetic fixtures are covered by the root MIT license. Up
 
 The map adapter reads a format documented by [OpenWorld](https://github.com/SihanXU/openworld/tree/076ab27d5312416cbabe19c12b90e086f5fc32d7). It is original code and does not vendor the OpenWorld engine, editor, maps, or assets. Reference pin and format sources are recorded in `tools/worldkit/source.json`; upstream's MIT code license has separate art/audio/font exceptions.
 
-Cargo and npm lockfiles identify further dependencies, which retain their respective licenses. No game artwork, audio, fonts, paid service, or upstream Git history is part of this toolset. Preserve the corresponding notices if redistributing upstream code or substantial portions of it.
+Cargo and npm lockfiles identify further dependencies, which retain their respective licenses. No game artwork, audio, fonts, paid service, or upstream Git history is part of the toolset's processing inputs or distributable outputs. Preserve the corresponding notices if redistributing upstream code or substantial portions of it.
+
+The three Jalasmara screenshots in `docs/visual/` are documentation evidence, not tool input/output or MIT-licensed assets. Their rights and source hashes are recorded in [the gallery](docs/visual/README.md).

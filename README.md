@@ -1,16 +1,18 @@
 # JalasmaraWorldKit
 
-Offline tools for map drafts and pixel-asset preparation. Outputs are review candidates: these tools do not publish content, alter a running game, or access player accounts.
+Offline tools for creating **reviewable map drafts and pixel-asset previews** for [Jalasmara](https://git.ppti.me/ardianryan/Jalasmara-The-Game). WorldKit is an authoring workflow, not the game engine, a live editor, or a map publishing service. Outputs require visual and gameplay review before they enter Godot or the server-owned world.
 
-| Tool | Purpose | Runtime |
+[Development screenshots](docs/visual/README.md) · [Tool provenance](THIRD_PARTY_NOTICES.md) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md)
+
+| Tool | What it does | Boundary |
 | --- | --- | --- |
-| `tools/worldkit` | Convert explicitly mapped OpenWorld JSON into validated polygon/elevation/portal drafts. Original adapter with no runtime dependencies. | Node.js |
-| `tools/pixel-snapper` | Detect/snap a pixel grid and optionally apply a palette through the pinned Sprite Fusion Pixel Snapper CLI. Original Python wrapper; unchanged upstream MIT Rust source. | Python + Rust |
-| `tools/image-to-pixel` | Prepare PNG palette previews using Image-to-Pixel 3.2.0's CPU backend and pngjs. | Node.js + locked npm dependencies |
+| [`tools/worldkit`](tools/worldkit/README.md) | Converts explicitly mapped OpenWorld-style JSON into polygon, elevation, and portal drafts | Original Node adapter; does not copy or run the OpenWorld engine |
+| [`tools/pixel-snapper`](tools/pixel-snapper/README.md) | Detects/snaps pixel grids and applies authored palettes | Original Python wrapper around pinned, attributed Sprite Fusion Pixel Snapper Rust code |
+| [`tools/image-to-pixel`](tools/image-to-pixel/README.md) | Produces PNG palette previews with a CPU backend | Uses the separately licensed Image-to-Pixel npm package |
 
-## Setup and checks
+## Requirements and checks
 
-Use Node.js 22.12+, Python 3.9+, and Rust/Cargo 1.90. The vendored Cargo lockfile is version 4. Initial dependency installation/build requires network access; subsequent processing runs locally.
+Use Node.js 22.12+, Python 3.9+, and Rust/Cargo 1.90. Installing the nested npm packages and building Rust initially needs network access; processing can then run locally.
 
 ```sh
 npm run setup:images
@@ -20,23 +22,30 @@ npm run check
 npm run audit:images
 ```
 
-The root package has no dependencies. `setup:images` installs only the nested image tool's locked packages. `build:snapper` verifies vendored source hashes and creates the local Rust binary; cached dependencies permit `python3 tools/pixel-snapper/snap.py build --offline`.
+`npm run check` covers map/image tests, snapper verification and Python tests, and Rust tests using its locked dependencies. The root package has no runtime dependencies. Generated outputs, caches, and installed packages are ignored by Git.
 
-## Prepare review outputs
+## Make a draft
 
 ```sh
 mkdir -p artifacts
-npm run map:import -- tools/worldkit/fixtures/connected.json --config tools/worldkit/fixtures/mapping.json --out artifacts/world-draft.json
+npm run map:import -- tools/worldkit/fixtures/connected.json \
+  --config tools/worldkit/fixtures/mapping.json \
+  --out artifacts/world-draft.json
 npm run palette -- path/to/source.png artifacts/palette-preview.png 128
-npm run snap -- path/to/source.png artifacts/grid-preview.png --pixel-size 4 --palette jala-muara
+npm run snap -- path/to/source.png artifacts/grid-preview.png \
+  --pixel-size 4 --palette jala-muara
 ```
 
-Use a fresh output path. Existing files are not silently overwritten. Pixel conversion is lossy: inspect transparency, small details, frame boundaries, and foot pivots before promoting an asset. Map drafts require explicit terrain/entity mapping, safe floors, authored height connectors, and reachable portal destinations; they are not automatically accepted as production manifests.
+Each command writes to a new output path and refuses unsafe overwrites. The map adapter requires explicit tile/material mappings, reachable portals, and authored height connectors. It reports invalid geometry rather than silently flattening it. Pixel conversion is lossy; inspect transparency, frame boundaries, small details, and foot pivots before using a preview. The [in-game copy of the adapter](https://git.ppti.me/ardianryan/Jalasmara-The-Game/src/branch/main/tools/worldkit) has a separate compatibility check against current world geometry.
 
-Each tool's README documents its exact flags, limits, and provenance. These utilities do not provide a game runtime, editor GUI, 3D reconstruction, or live map publishing.
+## What the screenshots show
 
-## CI and licenses
+The [gallery](docs/visual/README.md) documents actual Jalasmara world development: village building alignment, grounded stairs, and a forest gateway. **These are game screenshots, not WorldKit-generated output or evidence that the adapter built every pictured object.** Their source builds, hashes, limits, and separate game-art rights are recorded beside the images.
 
-GitLab CI runs the Node adapter/image tests and dependency audit, then Python adapter and upstream Rust tests in a separate Rust job. No GitHub Actions or GitHub report publishing is configured here. The pipeline validates this toolset; it does not build or deploy Jalasmara.
+## CI, license, and reporting
 
-Original code uses the [MIT license](LICENSE). Upstream code and dependencies retain their own notices: see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+Gitea is the primary repository and CI home. GitHub and GitLab are source backups; their CI is disabled for this kit. The CI workflow validates the tools but does not deploy Jalasmara. Original WorldKit adapters, tests, fixtures, and documentation use the [MIT license](LICENSE). Vendored upstream code retains its own notices in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Game screenshots are **not MIT-licensed**; see [gallery rights](docs/visual/README.md).
+
+Do not include credentials, player data, paid assets, or private moodboards in issues or contributions. No independent security audit of this toolset has been completed; report concerns under [SECURITY.md](SECURITY.md).
+
+The [roadmap](ROADMAP.md), [changelog](CHANGELOG.md), [code of conduct](CODE_OF_CONDUCT.md), and [citation files](CITATION.cff) document this early public toolset.

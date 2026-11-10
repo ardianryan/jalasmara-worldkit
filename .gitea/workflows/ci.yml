@@ -1,0 +1,50 @@
+name: WorldKit verification
+
+on:
+  push:
+    branches: [main, 'work/**']
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  node-python:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    container:
+      image: node:22-bookworm-slim
+    steps:
+      - name: Install tools before checkout
+        run: |
+          apt-get update -qq
+          apt-get install -y -qq --no-install-recommends git python3
+      - name: Checkout source
+        uses: https://github.com/actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Test adapters and Python wrapper
+        run: |
+          npm run test:maps
+          npm run setup:images
+          npm run test:images
+          npm run verify:snapper
+          npm run audit:images
+  rust:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    container:
+      image: rust:1.90-bookworm
+    steps:
+      - name: Install Git before checkout
+        run: |
+          apt-get update -qq
+          apt-get install -y -qq --no-install-recommends git python3
+      - name: Checkout source
+        uses: https://github.com/actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Test pinned Rust source
+        run: |
+          python3 tools/pixel-snapper/snap.py verify
+          python3 tools/pixel-snapper/snap.py build
+          python3 -m unittest discover -s tools/pixel-snapper/tests -v
+          cargo test --locked --manifest-path tools/pixel-snapper/vendor/Cargo.toml

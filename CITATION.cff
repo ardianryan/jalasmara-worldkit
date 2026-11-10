@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "Cite the WorldKit version and source commit used."
+title: "JalasmaraWorldKit"
+type: software
+authors:
+  - family-names: Ryan
+    given-names: Ardian
+version: 0.1.0
+date-released: 2026-11-10
+url: "https://git.ppti.me/ardianryan/jalasmara-worldkit"
+repository-code: "https://git.ppti.me/ardianryan/jalasmara-worldkit"
+abstract: "Offline map-draft and pixel-asset preparation tools for Jalasmara."

@@ -25,3 +25,6 @@ fixtures and documentation. It does not replace upstream copyright notices
 or relicense vendored source and installed dependencies. Those components
 remain under their own licenses, identified in THIRD_PARTY_NOTICES.md and
 beside the corresponding source files.
+
+The Jalasmara game screenshots in docs/visual/ are excluded from this MIT
+grant. They are all rights reserved game artwork; see docs/visual/README.md.
