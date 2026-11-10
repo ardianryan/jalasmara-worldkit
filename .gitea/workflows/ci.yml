@@ -37,7 +37,7 @@ jobs:
       - name: Install tools before checkout
         run: |
           apt-get update -qq
-          apt-get install -y -qq --no-install-recommends git python3 curl ca-certificates
+          apt-get install -y -qq --no-install-recommends git python3 curl ca-certificates build-essential
       - name: Checkout source
         uses: https://github.com/actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
