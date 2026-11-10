@@ -16,7 +16,7 @@ jobs:
       - name: Install tools before checkout
         run: |
           apt-get update -qq
-          apt-get install -y -qq --no-install-recommends git python3
+          apt-get install -y -qq --no-install-recommends git python3 ca-certificates
       - name: Checkout source
         uses: https://github.com/actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
@@ -32,18 +32,22 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     container:
-      image: rust:1.90-bookworm
+      image: node:22-bookworm-slim
     steps:
-      - name: Install Git before checkout
+      - name: Install tools before checkout
         run: |
           apt-get update -qq
-          apt-get install -y -qq --no-install-recommends git python3
+          apt-get install -y -qq --no-install-recommends git python3 curl ca-certificates
       - name: Checkout source
         uses: https://github.com/actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           persist-credentials: false
       - name: Test pinned Rust source
         run: |
+          curl -fsSL https://sh.rustup.rs -o /tmp/worldkit-rustup.sh
+          sh /tmp/worldkit-rustup.sh -y --no-modify-path --profile minimal --default-toolchain 1.90.0
+          export PATH="$HOME/.cargo/bin:$PATH"
+          rustc --version
           python3 tools/pixel-snapper/snap.py verify
           python3 tools/pixel-snapper/snap.py build
           python3 -m unittest discover -s tools/pixel-snapper/tests -v
